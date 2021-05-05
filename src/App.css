@@ -1,38 +1,70 @@
-.App {
-  text-align: center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.input {
+    line-height: 1.5rem;
+    border-radius: 5px;
+    border: solid 1px #eeeeee;
+    padding: 4px 6px;
+    display: block;
+    width: 100%;
+    outline-color: #3ee9f5;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.form {
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    padding: 10px 20px;
+    margin: 50px auto;
+    width: 400px;
+    border: solid 3px #3ee9f5;
+    border-radius: 24px;
+    background: rgb(175, 220, 243);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.form div {
+    margin: 20px 0px;
 }
 
-.App-link {
-  color: #61dafb;
+.form label {
+    color: white;
+    display: inline-block;
+    margin-bottom: 5px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.send-btn {
+    display: block;
+    width: 150px;
+    margin: 10px auto;
+    padding: 15px;
+    border-radius: 5px;
+    border: none;
+    /* background: white;
+    color: black; */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+/* .form button:hover {
+    background: rgb(105, 204, 126);
+    color: white;
+} */
+.form p {
+    margin: 5px;
+}
+.message {
+    resize: vertical;
+    border-radius: 5px;
+    border: solid 1px #eeeeee;
+    padding: 4px 6px;
+    display: block;
+    width: 100%;
+    outline-color: #3ee9f5;
+}
+.error {
+    color: red;
+    font-weight: 700;
+    font-size: 12px;
 }
