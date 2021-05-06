@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import { Formik } from "formik";
 import * as yup from "yup";
-
+import Recaptcha from "react-recaptcha";
 import "./App.css";
 
 function App() {
+    const [isVerified, setVerified] = useState(false);
     const validationSchema = yup.object().shape({
         name: yup
             .string()
@@ -29,26 +30,39 @@ function App() {
             .required("Enter your message!"),
     });
     function sendMessage(values) {
-        emailjs
-            .send(
-                "service_m4bp5pc",
-                "template_bgfuq2l",
-                {
-                    from_name: values.name,
-                    message: values.message,
-                    reply_to: values.email,
-                },
-                "user_7FnNuhJMxDUlf7lEWjcgI"
-            )
-            .then(
-                (result) => {
-                    console.log(result.text);
-                },
-                (error) => {
-                    console.log(error.text);
-                }
-            );
+        if (isVerified) {
+            emailjs
+                .send(
+                    "service_m4bp5pc",
+                    "template_bgfuq2l",
+                    {
+                        from_name: values.name,
+                        message: values.message,
+                        reply_to: values.email,
+                    },
+                    "user_7FnNuhJMxDUlf7lEWjcgI"
+                )
+                .then(
+                    (result) => {
+                        console.log(result.text);
+                    },
+                    (error) => {
+                        console.log(error.text);
+                    }
+                );
+        } else {
+            alert("Please verify that you aren't a robot!");
+        }
     }
+    function onloadCallback() {
+        console.log("reCAPTCHA loaded");
+    }
+    function verifyCallback(response) {
+        if (response) {
+            setVerified(true);
+        }
+    }
+
     return (
         <div>
             <Formik
@@ -155,7 +169,12 @@ function App() {
                                 <p className="error">{errors.message}</p>
                             )}
                         </div>
-
+                        <Recaptcha
+                            sitekey="6LfLOccaAAAAANwle6Pikns466Ndz7sffj0lDTan"
+                            render="explicit"
+                            onloadCallback={onloadCallback}
+                            verifyCallback={verifyCallback}
+                        />
                         <input
                             className="send-btn"
                             onClick={handleSubmit}
